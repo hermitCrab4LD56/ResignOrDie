@@ -166,7 +166,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   damagePerHit: 50
-  healthBarPrefab: {fileID: 0}
+  healthBarPrefab: {fileID: 7015111257718893791, guid: 8f407e792b80dac43879e38537d86851, type: 3}
 --- !u!1001 &8379705336382122445
 PrefabInstance:
   m_ObjectHideFlags: 0
