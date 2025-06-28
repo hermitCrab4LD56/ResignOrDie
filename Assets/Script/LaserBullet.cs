@@ -18,16 +18,21 @@ public class LaserBullet : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D collision)
+{
+    if (collision.CompareTag("Player"))
     {
-        if (collision.CompareTag("Player"))
+        // 调用玩家的血量系统
+        Health health = collision.GetComponent<Health>();
+        if (health != null)
         {
-            // 播放音效 + 蹦出特效
-            FXManager.Instance.PlayHitFeedback(collision.transform.position);
-
-            // 你可以加上玩家受伤逻辑，例如：
-            // collision.GetComponent<PlayerHealth>()?.TakeDamage(10);
-
-            Destroy(gameObject); // 子弹消失
+            health.TakeDamage();
         }
+
+        // 播特效音效
+        FXManager.Instance.PlayHitFeedback(collision.transform.position);
+
+        Destroy(gameObject);
     }
+}
+
 }

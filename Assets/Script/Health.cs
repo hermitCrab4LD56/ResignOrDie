@@ -2,28 +2,39 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    public int maxHealth = 100;
-    private int currentHealth;
+    [SerializeField] private int maxHealth = 5;
+    [SerializeField] private int damagePerHit = 1;
+
+    public int MaxHealth => maxHealth;
+    public int CurrentHealth { get; private set; }
+
+    [SerializeField] private GameObject healthBarPrefab;
+    private GameObject healthBarInstance;
 
     void Start()
     {
-        currentHealth = maxHealth;
+        CurrentHealth = maxHealth;
+
+        if (healthBarPrefab != null)
+        {
+            healthBarInstance = Instantiate(healthBarPrefab, transform.position + Vector3.up * 1.5f, Quaternion.identity, transform);
+        }
     }
 
-    public void TakeDamage(int amount)
+    public void TakeDamage()
     {
-        currentHealth -= amount;
-        Debug.Log($"{gameObject.name} took {amount} damage. Remaining HP: {currentHealth}");
-
-        if (currentHealth <= 0)
+        CurrentHealth -= damagePerHit;
+        if (CurrentHealth <= 0)
         {
             Die();
         }
     }
 
-    void Die()
+    private void Die()
     {
-        Debug.Log($"{gameObject.name} has died.");
-        Destroy(gameObject); // Or play animation
+        if (healthBarInstance != null)
+            Destroy(healthBarInstance);
+
+        gameObject.SetActive(false); // 或者 Destroy(gameObject);
     }
 }
