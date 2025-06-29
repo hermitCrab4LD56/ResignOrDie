@@ -19,6 +19,12 @@ public class BattleSceneManager : MonoBehaviour
 
     private bool resultTriggered = false;
 
+    // void Start()
+    // {
+    //     Screen.SetResolution(1920, 1080, false);
+    // }
+
+
     void Update()
     {
         if (resultTriggered) return;
