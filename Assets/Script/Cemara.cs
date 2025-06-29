@@ -1,18 +1,50 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class Cemara : MonoBehaviour
 {
+    [SerializeField] private Transform player;        // 拖入玩家对象
+    private Vector3 lastPosition;
+    // public GameObject oSymbol;
+    [SerializeField] private Transform oSymbol;   
 
-    [SerializeField] private Transform player;
-    // Start is called before the first frame update
-  
+    void Start()
+    {
+        if (player != null)
+        {
+            lastPosition = new Vector3(player.position.x, player.position.y, transform.position.z);
+        }
+        else {
+            if (oSymbol != null)
+            {
+                lastPosition = new Vector3(oSymbol.position.x, oSymbol.position.y, transform.position.z);
+            }
+        }
+        // else if (player==null && oSymbol!=null)
+        // {
+        //     lastPosition = new Vector3(oSymbol.position.x, oSymbol.position.y, transform.position.z);
+        // }
+    }
 
-    // Update is called once per frame
     void Update()
     {
-        transform.position=new Vector3(player.position.x,player.position.y,transform.position.z);
+        if (player != null)
+        {
+            // 正常跟随玩家
+            lastPosition = new Vector3(player.position.x, player.position.y, transform.position.z);
+        }
+        else {
+            if (oSymbol != null)
+            {
+                lastPosition = new Vector3(oSymbol.position.x, oSymbol.position.y, transform.position.z);
+            }
+        }
+
+        // else if (player==null && oSymbol!=null)
+        // {
+        //     lastPosition = new Vector3(oSymbol.position.x, oSymbol.position.y, transform.position.z);
+        // }
+
+        // 始终更新为最后一次已知的位置（避免 null 出错）
+        transform.position = lastPosition;
     }
 }

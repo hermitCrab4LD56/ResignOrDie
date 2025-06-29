@@ -65,7 +65,8 @@ public class Health : MonoBehaviour
         // ✅ 销毁血条
         if (healthBarInstance != null)
         {
-            Destroy(healthBarInstance);
+            //Destroy(healthBarInstance);
+            Destroy(gameObject, 2f);
         }
 
         // ✅ 你可以选择直接隐藏角色、禁用脚本或延迟销毁
